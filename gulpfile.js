@@ -30,64 +30,65 @@ function libJs(){
     return gulp.src('./src/libJs/**/*.js')
         .pipe(order([
             "lib.js"
-            ]))
-        .pipe(minify())
+        ]))
         .pipe(concat('lib.min.js'))
         .pipe(gulp.dest('./build/js'))
         .pipe(browserSync.stream());
 }
 function sassCompile(){
-  return gulp.src('./src/sass/**/*.sass')
-  .pipe(sourcemaps.init())
-  .pipe(sass().on('error', sass.logError))
-  .pipe(gulp.dest('./src/css'))
-  .pipe(concat('style.css'))
-  .pipe(autoprefixer({
-      browsers: ['last 2 versions'],
-      cascade: false
-  }))
-  .pipe(cleanCSS({
-      level: 2
-  }))
-  .pipe(sourcemaps.write())
-  .pipe(gulp.dest('./build/css'))
-  .pipe(browserSync.stream());
+    return gulp.src('./src/sass/**/*.sass')
+        .pipe(sourcemaps.init())
+        .pipe(sass().on('error', sass.logError))
+        .pipe(gulp.dest('./src/css'))
+        .pipe(concat('style.css'))
+        .pipe(autoprefixer({
+            browsers: ['last 2 versions'],
+            cascade: false
+        }))
+        .pipe(cleanCSS({
+            level: 2
+        }))
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest('./build/css'))
+        .pipe(browserSync.stream());
 }
 function scssCompile(){
     return gulp.src('./src/sass/**/*.scss')
         .pipe(sourcemaps.init())
-        .pipe(sass().on('error', sass.logError))
+        .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest('./src/css'))
-        .pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
         .pipe(browserSync.stream());
 }
 function scripts() {
-   return gulp.src('./src/js/*.js')
-   .pipe(foreach(function(stream, file){
-       return stream
-       .pipe(babel())
-       .pipe(webpack({
-           output: {
-               filename: '[name].js'
-           }
-       }))
-       .pipe(minify())
-       .pipe(concat(file))
-       .pipe(gulp.dest('./build/js'))
-   }))
-   .pipe(browserSync.stream());
+    return gulp.src('./src/js/*.js')
+        .pipe(babel())
+        .pipe(webpack({
+            output: {
+                filename: '[name].js'
+            },
+            optimization: {
+                minimize: false
+            }
+        }))
+        .pipe(sourcemaps.init())
+        .pipe(minify({
+            noSource: true,
+            mangle: false,
+            compress: false
+        }))
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest('./build/js'))
+        .pipe(browserSync.stream());
 }
 function move() {
-	return gulp.src('./src/*.html')
-    .pipe(foreach(function(stream, file) {
-        return stream
+    return gulp.src('./src/*.html')
         .pipe(fileinclude({
             prefix: '@@',
             basepath: '@file'
         }))
-    }))
-	.pipe(gulp.dest('./build'))
+        .pipe(gulp.dest('./build'))
+        .pipe(browserSync.stream());
 }
 function moveImg() {
     return gulp.src('./src/img/**/*')
@@ -98,21 +99,21 @@ function moveFonts(){
         .pipe(gulp.dest('./build/fonts'))
 }
 function clean() {
-   return del(['build/*'])
+    return del(['build/*'])
 }
 function watch() {
-   browserSync.init({
-      server: {
-          baseDir: "./build/"
-      }
-  });
-  gulp.watch('./src/sass/**/*.sass', gulp.series(sassCompile));
-  gulp.watch('./src/sass/**/*.scss', gulp.series(scssCompile));
-  gulp.watch('./src/js/**/*.js', scripts);
-  gulp.watch('./src/*.html', move);
-  gulp.watch("./src/*.html").on('change', browserSync.reload);
-  gulp.watch('./src/libCss/**/*.css', libStyles);
-  gulp.watch('./src/libJS/**/*.js', libJs);
+    browserSync.init({
+        server: {
+            baseDir: "./build/"
+        }
+    });
+    gulp.watch('./src/sass/**/*.sass', gulp.series(sassCompile));
+    gulp.watch('./src/sass/**/*.scss', gulp.series(scssCompile));
+    gulp.watch('./src/js/**/*.js', scripts);
+    gulp.watch('./src/**/*.html', move);
+    gulp.watch("./src/**/*.html").on('change', browserSync.reload);
+    gulp.watch('./src/libCss/**/*.css', libStyles);
+    gulp.watch('./src/libJS/**/*.js', libJs);
 }
 
 gulp.task('move', move);
@@ -121,7 +122,7 @@ gulp.task('libStyles',libStyles);
 gulp.task('libJs', libJs);
 gulp.task('moveFonts', moveFonts);
 gulp.task('img', function(){
-	return gulp.src('./src/img/**/*')
+    return gulp.src('./src/img/**/*')
         .pipe(imagemin())
         .pipe(gulp.dest('./build/img'))
 });

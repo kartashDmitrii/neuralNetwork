@@ -47,75 +47,94 @@
   font-style: italic; }
 
 body {
+  margin: 0;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: linear-gradient(to bottom, #606c88 0%, #3f4c6b 100%);
-  min-height: 100vh;
-  justify-content: space-between;
-  font-family: OpenSans; }
-  body #canvas {
-    position: absolute;
-    top: 20px;
-    right: 0;
-    left: 0;
-    margin: auto;
-    background-color: #ffffff;
-    width: 500px;
-    height: 500px; }
-  body .custom-field {
+  overflow-x: hidden; }
+
+.custom-select {
+  display: flex;
+  border-radius: 10px;
+  width: max-content;
+  box-shadow: inset -2px -2px 2px 2px #393939;
+  position: relative;
+  z-index: 1; }
+  .custom-select label {
+    font-size: 18px;
+    line-height: 21px;
+    margin: 0;
+    display: flex;
+    cursor: pointer; }
+    .custom-select label:first-child span {
+      border-radius: 10px 0 0 10px;
+      border-left-width: 1px; }
+    .custom-select label:last-child span {
+      border-radius: 0 10px 10px 0; }
+    .custom-select label span {
+      padding: 5px 10px;
+      border: solid #393939;
+      border-width: 1px 1px 1px 0;
+      transition: all .3s;
+      position: relative;
+      z-index: 0; }
+    .custom-select label input {
+      width: 0;
+      height: 0;
+      opacity: 0;
+      display: none;
+      background-color: #ffffff; }
+      .custom-select label input:checked ~ span {
+        background-color: #393939;
+        color: #fff; }
+
+.table {
+  display: flex; }
+  .table > div {
+    border: solid #393939;
+    border-width: 1px 1px 1px 0; }
+    .table > div:first-child {
+      border-left-width: 1px; }
+    .table > div > * {
+      border-bottom: 1px solid #393939;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center; }
+      .table > div > *:last-child {
+        border-bottom: 0; }
+    .table > div p {
+      margin: 0; }
+
+.dates {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-around; }
+  .dates p {
+    margin-bottom: 0; }
+
+main {
+  display: flex;
+  font-size: 18px;
+  line-height: 21px;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: flex-start; }
+  main .info {
+    width: 30%;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    border-top: 2px solid #d97704;
-    padding: 40px;
-    box-sizing: border-box;
-    width: 100%; }
-    body .custom-field .train-field {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 30px; }
-      body .custom-field .train-field input {
-        border-radius: 3px;
-        padding: 12px;
-        border: none;
-        min-width: 40%;
-        margin-right: 20px;
-        font-size: 18px;
-        line-height: 21px;
-        outline: none;
-        text-align: center; }
-      body .custom-field .train-field button {
-        padding: 14px 20px;
-        font-size: 18px;
-        line-height: 21px;
-        background: transparent;
-        border-radius: 20px;
-        border: 3px solid #d97704;
-        color: #fff;
-        cursor: pointer;
-        outline: none; }
-    body .custom-field .result {
-      display: flex;
-      justify-content: center; }
-      body .custom-field .result p {
-        width: 40%;
-        padding: 12px 0;
-        margin: 0 20px 0 0;
-        font-size: 18px;
-        line-height: 21px;
-        border-radius: 3px;
-        border: solid #ffffff;
-        border-width: 1px 0 1px 0;
-        color: #ffffff;
-        text-transform: uppercase;
-        text-align: center; }
-      body .custom-field .result button {
-        padding: 14px 20px;
-        font-size: 18px;
-        line-height: 21px;
-        background: transparent;
-        border-radius: 20px;
-        border: 3px solid #d97704;
-        color: #fff;
-        cursor: pointer;
-        outline: none; }
+    align-items: center;
+    justify-content: center; }
+  main .graph {
+    width: 70%;
+    height: 100%;
+    background-color: #fafafa; }
+  main .curr {
+    display: flex;
+    flex-direction: column; }
+    main .curr p {
+      margin: 0 0 15px;
+      font-size: 18px;
+      line-height: 21px; }

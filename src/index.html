@@ -6,37 +6,98 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>neural Network</title>
-<!--    <link rel="stylesheet" href="css/lib.css">-->
+    <!--    <link rel="stylesheet" href="css/lib.css">-->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
-
-<div class="canvas">
-    <canvas id="canvas" style="display: block"> Browser Not support canvas</canvas>
-</div>
-
-<div class="custom-field">
-    <div class="train-field">
-        <input type="text">
-        <button>Train</button>
+<main>
+    <div class="info">
+        <div class="curr">
+            <p>Выберите валюту</p>
+            <div class="custom-select">
+                <label>
+                    <input type="radio" name="currency" value="UAH" checked>
+                    <span>UAH</span>
+                </label>
+                <label>
+                    <input type="radio" name="currency" value="USD">
+                    <span>USD</span>
+                </label>
+                <label>
+                    <input type="radio" name="currency" value="EUR">
+                    <span>EUR</span>
+                </label>
+                <label>
+                    <input type="radio" name="currency" value="RUB">
+                    <span>RUB</span>
+                </label>
+            </div>
+        </div>
+        <div class="today">
+            <h2>Курс валют на сегодня:</h2>
+            <div class="table">
+                <div class="head">
+                    <p>Валюта</p>
+                    <p>UAH</p>
+                </div>
+                <div class="row">
+                    <p>USD</p>
+                    <p>###</p>
+                </div>
+                <div class="row">
+                    <p>EUR</p>
+                    <p>###</p>
+                </div>
+                <div class="row">
+                    <p>RUB</p>
+                    <p>###</p>
+                </div>
+            </div>
+        </div>
+        <div class="dates">
+            <div class="show">
+                <p>График на:</p>
+                <div class="custom-select">
+                    <label>
+                        <input type="radio" name="date" value="year">
+                        <span>year</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="date" value="month" checked>
+                        <span>month</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="date" value="week">
+                        <span>week</span>
+                    </label>
+                </div>
+            </div>
+            <div class="prognoses">
+                <p>Прогноз на:</p>
+                <div class="custom-select">
+                    <label>
+                        <input type="radio" name="prognos" value="day" checked>
+                        <span>day</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="prognos" value="week">
+                        <span>week</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="prognos" value="month">
+                        <span>month</span>
+                    </label>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="result">
-        <p>Утка</p>
-        <button>Answer</button>
+    <div class="graph">
+
     </div>
-</div>
+</main>
 
-<!--
-    Умеет:
 
-Плюс
-Минус
-Крест
-Палка
-
--->
 <script src="js/lib.min.js"></script>
-<script src="js/main.js"></script>
+<script async src="js/main-min.js"></script>
 </body>
 </html>
