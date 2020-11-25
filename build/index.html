@@ -13,7 +13,7 @@
 <main>
     <div class="info">
         <div class="curr">
-            <p>Выберите валюту</p>
+            <p>Выберите основную валюту</p>
             <div class="custom-select">
                 <label>
                     <input type="radio" name="currency" value="UAH" checked>
@@ -33,24 +33,45 @@
                 </label>
             </div>
         </div>
+        <div class="curr">
+            <p>Выберите валюту для соотношения</p>
+            <div class="custom-select">
+                <label>
+                    <input type="radio" name="second-currency" value="UAH" disabled>
+                    <span>UAH</span>
+                </label>
+                <label>
+                    <input type="radio" name="second-currency" value="USD" checked>
+                    <span>USD</span>
+                </label>
+                <label>
+                    <input type="radio" name="second-currency" value="EUR">
+                    <span>EUR</span>
+                </label>
+                <label>
+                    <input type="radio" name="second-currency" value="RUB">
+                    <span>RUB</span>
+                </label>
+            </div>
+        </div>
         <div class="today">
             <h2>Курс валют на сегодня:</h2>
             <div class="table">
                 <div class="head">
                     <p>Валюта</p>
-                    <p>UAH</p>
+                    <p class="curr">UAH</p>
                 </div>
                 <div class="row">
-                    <p>USD</p>
-                    <p>###</p>
+                    <p class="name">USD</p>
+                    <p class="val">###</p>
                 </div>
                 <div class="row">
-                    <p>EUR</p>
-                    <p>###</p>
+                    <p class="name">EUR</p>
+                    <p class="val">###</p>
                 </div>
                 <div class="row">
-                    <p>RUB</p>
-                    <p>###</p>
+                    <p class="name">RUB</p>
+                    <p class="val">###</p>
                 </div>
             </div>
         </div>
@@ -76,15 +97,15 @@
                 <p>Прогноз на:</p>
                 <div class="custom-select">
                     <label>
-                        <input type="radio" name="prognos" value="day" checked>
+                        <input type="radio" name="prognose" value="day">
                         <span>day</span>
                     </label>
                     <label>
-                        <input type="radio" name="prognos" value="week">
+                        <input type="radio" name="prognose" value="week">
                         <span>week</span>
                     </label>
                     <label>
-                        <input type="radio" name="prognos" value="month">
+                        <input type="radio" name="prognose" value="month" checked>
                         <span>month</span>
                     </label>
                 </div>
@@ -92,7 +113,7 @@
         </div>
     </div>
     <div class="graph">
-
+        <canvas id="myChart"></canvas>
     </div>
 </main>
 
